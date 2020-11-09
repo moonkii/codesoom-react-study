@@ -1,20 +1,23 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
-
 import { render } from '@testing-library/react';
+
+import { useDispatch, useSelector } from 'react-redux';
 
 import App from './App';
 
 jest.mock('react-redux');
 
 test('App', () => {
-  // TODO: selector 조작
+  const dispatch = jest.fn();
+
+  useDispatch.mockImplementation(() => dispatch);
+
   useSelector.mockImplementation((selector) => selector({
     taskTitle: '',
     tasks: [
-      { id: 1, title: '아무 것도 하지 않기 #1' },
-      { id: 2, title: '아무 것도 하지 않기 #2' },
+      { id: 1, title: 'Task-1' },
+      { id: 2, title: 'Task-2' },
     ],
   }));
 
@@ -22,5 +25,6 @@ test('App', () => {
     <App />
   ));
 
-  expect(getByText(/추가/)).not.toBeNull();
+  expect(getByText(/Task-1/)).not.toBeNull();
+  expect(getByText(/Task-2/)).not.toBeNull();
 });
