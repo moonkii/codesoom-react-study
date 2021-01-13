@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/restaurants-detail/index.jsx'),
+  entry: path.resolve(__dirname, 'src/restaurants-login/index.jsx'),
   module: {
     rules: [
       {
